@@ -860,16 +860,538 @@ function unique(arr) {
 
 // ----------------------------------------------------------------------------------
 
-// Перебирающие методы
+// Перебирающие методы массивов
+// для их пожжержки в IE8 подключить ES5-shim
+
+// forEach // arr.forEach(callback[, thisArg]); вызывает ф-ю callback
+// item - очередной елемент
+// i - его номер
+// arr -  массив
+// forEach как более елегантный вариант перебора цикла чем обычный for
+
+// filter // arr.filter (callback[, thisArg]);
+// создает новый массив в который войдуи только елементы arr для которых вызов вернет true
+
+// map // rr.map(callback[, thisArg]); >> трансформация массива
+
+// every/some >> проверка массива
+// arr.every(callback[, thisArg]); >> вернет true если каждый елемент arr вернет true 
+// arr.some(callback[, thisArg]); >> вернет true если какой-то елемент arr вернет true
+
+// reduce/reduceRight // arr.forEach(callback[, initialValue]); используетьяс для обработки каждогоелемента масссива
+// с сохранением промежуточного оезультата !!!
+// callback для каждого елемента массива сохроняя промежуточный результат
+// аргументы ф-ии callback(prevValue, currenItem, indx, arr)
+// prevValue - последний результат вызова (он же и промежуточный)
+// currenItem - текущий елемент массива (слева на право)
+// ! если reduce не имеет воторого аргумента оно = первому елементу масива и перебор нчнеться со второго
+// reduceRight - работает аналогично но идет с права на лево
+
+// ----------------------------------------------------------------------------------
+
+// Task 33 // цикл через map
+function throughMap(arr) {
+    let arrLenght = arr.map(function (item) { // каждый елемент
+        return item.length; // длина каждого елемента в arrLenght
+    });
+    return arrLenght;
+};
+
+// Task 34 // массив частных сумм
+function getSum(arr) {
+    let result = []; // создвем смассив
+    if (!arr.length) return result; // если масив пуст вернет result
+
+    let totalSum = arr.reduce(function (sum, item) { // проходит по массиву слева направл
+        result.push(sum); // пушит первый едемент в пустой массив
+        return sum + item; // на каждом елементе добаляет к нему предыдущий елемент
+    });
+    result.push(totalSum); // добавляет последний елемент так как по дефотлу reduce к нему не доходит
+    return result;
+};
+
+// ----------------------------------------------------------------------------------
+
+// Task 35 // псевдомассив аргументов "arguments"
+// В старом стандарте JavaScript псевдо-массив arguments и переменные-параметры ссылаются на одни и те же значения.
+/* Например:
+function f(x) {
+    arguments[0] = 5; // меняет переменную x
+    alert(x); // 5
+}
+f(1);
+Наоборот:
+function f(x) {
+    x = 5;
+    alert(arguments[0]); // 5, обновлённый x
+}
+f(1); */
+// В современной редакции стандарта это поведение изменено. Аргументы отделены от локальных переменных:
+
+/* Если вы не используете строгий режим,
+то чтобы переменные не менялись «неожиданно»,
+рекомендуется никогда не изменять arguments. */
+
+// arguments – это не массив
+// В действительности arguments - это обычный объект, просто ключи числовые и есть length
+
+/* function copy(dst) { // Для объединения нескольких объектов в один:
+    for (var i = 1; i < arguments.length; i++) { // перебор аргументов в ф-ии
+        var arg = arguments[i]; // добавляет в переменную объекты из аргументов
+        for (var key in arg) { // перебор свойств из бъектов
+            dst[key] = arg[key]; добавление свойств в объект dist
+        }
+    }
+    return dst;
+} */
+// ----------------------------------------------------------------------------------
+
+// Аргументы по умолчанию через ||
+/* function showWarning(width, height, title, contents) {
+  width = width || 200; // если не указана width, то width = 200
+  height = height || 100; // если нет height, то height = 100
+  title = title || "Предупреждение";
+
+  //...
+} */
+
+/* function showWarning(width, height, title, contents) { // только если width === undefined
+  if (width === undefined) width = 200;
+  if (height === undefined) height = 100;
+  if (title === undefined) title = "Предупреждение";
+
+  //...
+} */
+
+// ----------------------------------------------------------------------------------
+
+// Именованные аргументы – альтернативная техника работы с аргументами, которая вообще не использует arguments.
+
+// В JavaScript для этих целей используется передача аргументов в виде объекта, а в его свойствах мы передаём параметры.
+/* function showWarning(options) {
+  var width = options.width || 200; // по умолчанию
+  var height = options.height || 100;
+
+  var contents = options.contents || "Предупреждение";
+
+  // ...
+} */
+
+// Вызвать такую функцию очень легко. Достаточно передать объект аргументов, указав в нем только нужные:
+
+/* showWarning({
+  contents: "Вы вызвали функцию" // и всё понятно!
+}); */
+
+// Ещё один бонус кроме красивой записи – возможность повторного использования объекта аргументов:
+
+/* var opts = {
+  width: 400,
+  height: 200,
+  contents: "Текст"
+};
+
+showWarning(opts);
+
+opts.contents = "Другой текст";
+
+showWarning(opts); // вызвать с новым текстом, без копирования других аргументов */
+
+// !! Именованные аргументы применяются во многих JavaScript-фреймворках. !!
+
+// ----------------------------------------------------------------------------------
+
+// Task 36
+function isUndefiened(x) { // проверка аргумента на undfined 
+    return arguments.length ? 1 : 0;
+}
+
+// Task 36 сумма аргументов
+/* function sumArg() {
+    let result = 0;
+    for (let i = 0; i < arguments.length; i++) {
+        result += arguments[i];
+    };
+    return result;
+} */
 
 
+// ----------------------------------------------------------------------------------
+
+// Date & time
+// new Date(milliseconds) > (1/1000 sec from 1 jan 1970)
+// new Date(milliseconds) 
+// new Date(year, month, date, hours, minutes, seconds, ms) >> обязательны первые 2 аргумента
+
+// получение компонентов даты
+// getFullYear()
+// getMonth() 
+// getDate() > day
+// getHours()
+// getMinutes()
+// getSeconds()
+// getMilliseconds()
+
+// неделя в JS начинаеться с вск!
+// UTC
+// getUTCFullYear()
+// getUTCMonth()
+// getUTCDay() ... etc.
+
+// getTime() >> число миллисекунд с 1970
+// geTimezoneOffset() >> разница между местным и UTC в минутах
+
+// ----------------------------------------------------------------------------------
+
+// Установка компонентов даты + UTC варианты (setUTCHours())
+// setFullYear(year[, month, date])
+// setMonth(month [, date]) 
+// setDate(date) > day
+// setHours(hour[, min, sec, ms])
+// setMinutes(min[, sec, ms])
+// setSeconds(sec[,ms])
+// getMilliseconds(ms)
+// setTime(Milliseconds) > уст. всю дату по ms. 
+
+// Автоиспавление даты
+//var d = new Date(2013, 0, 32); // 32 января 2013 ?!?
+//alert(d); // ... это 1 февраля 2013!
+
+//var d = new Date(2011, 1, 28);
+//d.setDate(d.getDate() + 2); // установить дату + 2 дня
+//alert( d ); // 2 марта, 2011 
+
+//var d = new Date(); 
+//d.setSeconds(d.getSeconds() + 70);// на 70 секунд больше
+//alert( d ); // выведет корректную дату
+
+// Можно установить и нулевые, и даже отрицательные компоненты.
+//d.setDate(1); // поставить первое число месяца
+//alert( d );
+
+// ----------------------------------------------------------------------------------
+
+//Преобразование к числу, разность дат
+// Когда объект Date используется в числовом контексте, он преобразуется в количество миллисекунд:
+// alert(+new Date) // +date то же самое, что: +date.valueOf()
+
+// Важный побочный эффект: даты можно вычитать, результат вычитания объектов Date – их временная разница, 
+// в миллисекундах.
+
+// Бенчмаркинг !
+// Померяем, какая из функций быстрее:
+/*var arr = [];
+
+for (var i = 0; i < 1000; i++) arr[i] = 0;
+
+function walkIn(arr) {
+    for (var key in arr) arr[key]++;
+}
+function walkLength(arr) {
+    for (var i = 0; i < arr.length; i++) arr[i]++;
+}
+function bench(f) {
+    var date = new Date();
+    for (var i = 0; i < 10000; i++) f(arr);
+    return new Date() - date;
+}
+alert('Время walkIn: ' + bench(walkIn) + 'мс');
+alert('Время walkLength: ' + bench(walkLength) + 'мс'); */
+
+// Гораздо более надёжные результаты можно получить, если весь пакет тестов прогнать много раз.
+
+/* var arr = [];
+for (var i = 0; i < 1000; i++) arr[i] = 0;
+
+function walkIn(arr) {
+    for (var key in arr) arr[key]++;
+}
+
+function walkLength(arr) {
+    for (var i = 0; i < arr.length; i++) arr[i]++;
+}
+
+function bench(f) {
+    var date = new Date();
+    for (var i = 0; i < 1000; i++) f(arr);
+    return new Date() - date;
+}
+
+// bench для каждого теста запустим много раз, чередуя
+var timeIn = 0,
+    timeLength = 0;
+for (var i = 0; i < 100; i++) {
+    timeIn += bench(walkIn);
+    timeLength += bench(walkLength);
+}
+
+alert('Время walkIn: ' + timeIn + 'мс');
+alert('Время walkLength: ' + timeLength + 'мс'); */
+
+// performance.now()
+// вызов performance.now() возвращает количество миллисекунд, прошедшее с начала загрузки страницы.
+// Для бенчмаркинга лучше использовать performance.now()
 
 
+// console.time(метка) && console.timeEnd(метка)
 
+// console.time(метка) – включить внутренний хронометр браузера с меткой.
+// console.timeEnd(метка) – выключить внутренний хронометр браузера с меткой и вывести результат.
 
+/* Параметр "метка" используется для идентификации таймера, чтобы можно было делать много замеров одновременно
+и даже вкладывать измерения друг в друга.В коде ниже таймеры walkIn, walkLength – конкретные тесты,
+а таймер «All Benchmarks» – время «на всё про всё»: */
 
+/* var arr = [];
+for (var i = 0; i < 1000; i++) arr[i] = 0;
 
+function walkIn(arr) {
+    for (var key in arr) arr[key]++;
+}
 
+function walkLength(arr) {
+    for (var i = 0; i < arr.length; i++) arr[i]++;
+}
 
+function bench(f) {
+    for (var i = 0; i < 10000; i++) f(arr);
+}
 
+console.time("All Benchmarks");
 
+console.time("walkIn");
+bench(walkIn);
+console.timeEnd("walkIn");
+
+console.time("walkLength");
+bench(walkLength);
+console.timeEnd("walkLength");
+
+console.timeEnd("All Benchmarks"); */
+
+// ----------------------------------------------------------------------------------
+
+// Современные интерпретаторы JavaScript делают массу оптимизаций, например:
+
+// 1. Автоматически выносят в цикле значение типа arr.length, за пределы цикла.
+// 2. Стараются понять, значения какого типа хранит данная переменная или массив, 
+// какую структуру имеет объект и, исходя из этого, оптимизировать внутренние алгоритмы.
+// 3. Выполняют простейшие операции на этапе компиляции.
+// 4. Могут обнаружить, ни на что не влияющтй код и вообще исключить его из выполнения, хотя делают это редко.
+
+// ----------------------------------------------------------------------------------
+
+/* var date = new Date(2014, 11, 31, 12, 30, 0);
+
+var options = {
+  era: 'long',
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+  weekday: 'long',
+  timezone: 'UTC',
+  hour: 'numeric',
+  minute: 'numeric',
+  second: 'numeric'
+};
+
+alert( date.toLocaleString("ru", options) ); // среда, 31 декабря 2014 г. н.э. 12:30:00
+alert( date.toLocaleString("en-US", options) ); // Wednesday, December 31, 2014 Anno Domini 12:30:00 PM */
+
+// toString() возвращает дату целиком
+// toDateString() и toTimeString() – только дату и время.
+
+/* Если хочется иметь большую гибкость и кросс-браузерность, то также можно воспользоваться специальной библиотекой,
+например Moment.JS или написать свою функцию форматирования. */
+
+// ----------------------------------------------------------------------------------
+
+// Date.parse
+// var msUTC = Date.parse('2012-01-26T13:51:50.417Z'); // зона UTC
+// alert( msUTC ); // 1327571510417 (число миллисекунд)
+
+// Date.now() >> возвращает дату сразу в виде миллисекунд.
+/* Технически, он аналогичен вызову +new Date(), но в отличие от него не создаёт промежуточный объект даты, а поэтому – во много раз быстрее.
+Его использование особенно рекомендуется там, где производительность при работе с датами критична. Обычно это не на веб-страницах, а, к примеру, в разработке игр на JavaScript. */
+
+// ----------------------------------------------------------------------------------
+
+// Task 37 create a date
+function newDate() {
+    let date = new Date('February 20, 2012 03:12:00');
+    return date;
+}
+
+// Task 38 name of the weekday
+function getWeekDay() {
+    /* let week = ['вс', 'пн', 'вт', 'ср', 'чт', 'пт', 'сб'],
+        currentDay = new Date(),
+        day = currentDay.getDay();
+    return week[day]; */
+
+    let options = {
+        weekday: 'short',
+    },
+        currentDay = new Date();
+    return currentDay.toLocaleString("ru", options);
+}
+
+// Task 39
+function getLocalDay(date) {
+    let weekDay = new Date(date);
+    return weekDay.getDay() - 1;
+}
+
+// Task 40 last day of month
+function getLastDayOfMonth(year, month) {
+    let date = new Date(year, month, -1, 0);
+    return date.getDate();
+}
+
+// Task 41 'day ago'
+function getDayAgo(date, days) {
+    date.setDate(date.getDate() - days);
+    return date.getDate();
+}
+
+// Task 42 'seconds are past'
+function getSecondsToday() {
+    let now = new Date();
+
+    // создаём объект с текущими днём/месяцем/годом
+    let today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+
+    let diff = now - today; // разница в миллисекундах
+    return Math.round(diff / 1000); // получаем секунды
+}
+
+// В качестве альтернативного решения можно получить часы/минуты и преобразовать их в секунды:
+
+function getSecondsToday() {
+    let d = new Date();
+    return d.getHours() * 3600 + d.getMinutes() * 60 + d.getSeconds();
+}
+
+// Task 43 second before tomorrow
+
+function getSecondsToTomorrow() {
+    let now = new Date();
+
+    // завтрашняя дата
+    let tomorrow = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
+
+    let diff = tomorrow - now; // разница в миллисекундах
+    return Math.round(diff / 1000); // преобразуем в секунды
+}
+
+// Альтернативное решение:
+
+function getSecondsToTomorrow() {
+    let now = new Date();
+    let hour = now.getHours();
+    let minutes = now.getMinutes();
+    let seconds = now.getSeconds();
+    let totalSecondsToday = (hour * 60 + minutes) * 60 + seconds;
+    let totalSecondsInADay = 86400;
+
+    return totalSecondsInADay - totalSecondsToday;
+}
+
+// Task 44 special Date
+
+function formatDate(date) {
+
+    var dd = date.getDate();
+    if (dd < 10) dd = '0' + dd;
+
+    var mm = date.getMonth() + 1;
+    if (mm < 10) mm = '0' + mm;
+
+    var yy = date.getFullYear() % 100;
+    if (yy < 10) yy = '0' + yy;
+
+    return dd + '.' + mm + '.' + yy;
+}
+
+var d = new Date(2014, 0, 30); // 30 Янв 2014
+alert(formatDate(d)); // '30.01.14'
+
+// Task 45 орматирование относительной даты
+
+/* Если спустя date прошло менее 1 секунды, вывести "прямо сейчас".
+В противном случае, если с date прошло меньше 1 минуты, вывести "n сек. назад".
+В противном случае, если меньше часа, вывести "m мин. назад".
+В противном случае, полная дата в формате "DD.MM.YY HH:mm". А именно: "день.месяц.год часы:минуты", всё в виде двух цифр, т.е. 31.12.16 10:00. */
+
+function formatDate(date) {
+    let diff = new Date() - date; // разница в миллисекундах
+
+    if (diff < 1000) { // меньше 1 секунды
+        return 'прямо сейчас';
+    }
+
+    let sec = Math.floor(diff / 1000); // преобразовать разницу в секунды
+
+    if (sec < 60) {
+        return sec + ' сек. назад';
+    }
+
+    let min = Math.floor(diff / 60000); // преобразовать разницу в минуты
+    if (min < 60) {
+        return min + ' мин. назад';
+    }
+
+    // отформатировать дату
+    // добавить ведущие нули к единственной цифре дню/месяцу/часам/минутам
+    let d = date;
+    d = [
+        '0' + d.getDate(),
+        '0' + (d.getMonth() + 1),
+        '' + d.getFullYear(),
+        '0' + d.getHours(),
+        '0' + d.getMinutes()
+    ].map(component => component.slice(-2)); // взять последние 2 цифры из каждой компоненты
+
+    // соединить компоненты в дату
+    return d.slice(0, 3).join('.') + ' ' + d.slice(3).join(':');
+}
+
+alert(formatDate(new Date(new Date - 1))); // "прямо сейчас"
+
+alert(formatDate(new Date(new Date - 30 * 1000))); // "30 сек. назад"
+
+alert(formatDate(new Date(new Date - 5 * 60 * 1000))); // "5 мин. назад"
+
+// вчерашняя дата вроде 31.12.2016, 20:00
+alert(formatDate(new Date(new Date - 86400 * 1000)));
+
+// альтернаимвное решение
+
+function formatDate(date) {
+    let dayOfMonth = date.getDate();
+    let month = date.getMonth() + 1;
+    let year = date.getFullYear();
+    let hour = date.getHours();
+    let minutes = date.getMinutes();
+    let diffMs = new Date() - date;
+    let diffSec = Math.round(diffMs / 1000);
+    let diffMin = diffSec / 60;
+    let diffHour = diffMin / 60;
+
+    // форматирование
+    year = year.toString().slice(-2);
+    month = month < 10 ? '0' + month : month;
+    dayOfMonth = dayOfMonth < 10 ? '0' + dayOfMonth : dayOfMonth;
+    hour = hour < 10 ? '0' + hour : hour;
+    minutes = minutes < 10 ? '0' + minutes : minutes;
+
+    if (diffSec < 1) {
+        return 'прямо сейчас';
+    } else if (diffMin < 1) {
+        return `${diffSec} сек. назад`
+    } else if (diffHour < 1) {
+        return `${diffMin} мин. назад`
+    } else {
+        return `${dayOfMonth}.${month}.${year} ${hour}:${minutes}`
+    }
+}
