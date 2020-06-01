@@ -1314,7 +1314,7 @@ function formatDate(date) {
 }
 
 var d = new Date(2014, 0, 30); // 30 Янв 2014
-alert(formatDate(d)); // '30.01.14'
+// formatDate(d); // '30.01.14'
 
 // Task 45 орматирование относительной даты
 
@@ -1356,14 +1356,14 @@ function formatDate(date) {
     return d.slice(0, 3).join('.') + ' ' + d.slice(3).join(':');
 }
 
-alert(formatDate(new Date(new Date - 1))); // "прямо сейчас"
+// alert(formatDate(new Date(new Date - 1))); // "прямо сейчас"
 
-alert(formatDate(new Date(new Date - 30 * 1000))); // "30 сек. назад"
+// alert(formatDate(new Date(new Date - 30 * 1000))); // "30 сек. назад"
 
-alert(formatDate(new Date(new Date - 5 * 60 * 1000))); // "5 мин. назад"
+// alert(formatDate(new Date(new Date - 5 * 60 * 1000))); // "5 мин. назад"
 
 // вчерашняя дата вроде 31.12.2016, 20:00
-alert(formatDate(new Date(new Date - 86400 * 1000)));
+// alert(formatDate(new Date(new Date - 86400 * 1000)));
 
 // альтернаимвное решение
 
@@ -1395,3 +1395,66 @@ function formatDate(date) {
         return `${dayOfMonth}.${month}.${year} ${hour}:${minutes}`
     }
 }
+
+// Task 46 Функция - строковый буфер
+
+function makeBuffer() {
+    var text = '';
+
+    return function (piece) {
+        if (arguments.length == 0) { // вызов без аргументов
+            return text;
+        }
+        text += piece;
+    };
+};
+
+// Task 47 строковой буфер с очисткой
+function makeBuffer() {
+    var text = '';
+
+    function buffer(piece) {
+        if (arguments.length == 0) { // вызов без аргументов
+            return text;
+        }
+        text += piece;
+    };
+
+    buffer.clear = function () {
+        text = "";
+    }
+
+    return buffer;
+};
+
+// Task 48 сортировка
+
+function makeBuffer() {
+    var text = '';
+
+    function buffer(piece) {
+        if (arguments.length == 0) { // вызов без аргументов
+            return text;
+        }
+        text += piece;
+    };
+
+    buffer.clear = function () {
+        text = "";
+    }
+
+    return buffer;
+};
+
+function inArray(arr) {
+    return function (x) {
+        return arr.includes(x);
+    };
+}
+
+let arr = [1, 2, 3, 4, 5, 6, 7];
+alert(arr.filter(inArray([1, 2, 10]))); // 1,2
+
+// Task 49 фильтрация через функцию
+
+
