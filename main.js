@@ -100,8 +100,8 @@ function getDecimal(num) {
 }
 
 function getDecimal2(num) {
-    var str = "" + num; // переводит цифр в строку
-    var zeroPos = str.indexOf("."); // цифра перео точкой
+    let str = "" + num; // переводит цифр в строку
+    let zeroPos = str.indexOf("."); // цифра перео точкой
     if (zeroPos == -1)
         return 0;
     str = str.slice(zeroPos); // возвращает отрубленную цифру (которая в строке)
@@ -936,9 +936,9 @@ f(1); */
 // В действительности arguments - это обычный объект, просто ключи числовые и есть length
 
 /* function copy(dst) { // Для объединения нескольких объектов в один:
-    for (var i = 1; i < arguments.length; i++) { // перебор аргументов в ф-ии
-        var arg = arguments[i]; // добавляет в переменную объекты из аргументов
-        for (var key in arg) { // перебор свойств из бъектов
+    for (let i = 1; i < arguments.length; i++) { // перебор аргументов в ф-ии
+        let arg = arguments[i]; // добавляет в переменную объекты из аргументов
+        for (let key in arg) { // перебор свойств из бъектов
             dst[key] = arg[key]; добавление свойств в объект dist
         }
     }
@@ -969,10 +969,10 @@ f(1); */
 
 // В JavaScript для этих целей используется передача аргументов в виде объекта, а в его свойствах мы передаём параметры.
 /* function showWarning(options) {
-  var width = options.width || 200; // по умолчанию
-  var height = options.height || 100;
+  let width = options.width || 200; // по умолчанию
+  let height = options.height || 100;
 
-  var contents = options.contents || "Предупреждение";
+  let contents = options.contents || "Предупреждение";
 
   // ...
 } */
@@ -985,7 +985,7 @@ f(1); */
 
 // Ещё один бонус кроме красивой записи – возможность повторного использования объекта аргументов:
 
-/* var opts = {
+/* let opts = {
   width: 400,
   height: 200,
   contents: "Текст"
@@ -1054,14 +1054,14 @@ function isUndefiened(x) { // проверка аргумента на undfined
 // setTime(Milliseconds) > уст. всю дату по ms. 
 
 // Автоиспавление даты
-//var d = new Date(2013, 0, 32); // 32 января 2013 ?!?
+//let d = new Date(2013, 0, 32); // 32 января 2013 ?!?
 //alert(d); // ... это 1 февраля 2013!
 
-//var d = new Date(2011, 1, 28);
+//let d = new Date(2011, 1, 28);
 //d.setDate(d.getDate() + 2); // установить дату + 2 дня
 //alert( d ); // 2 марта, 2011 
 
-//var d = new Date(); 
+//let d = new Date(); 
 //d.setSeconds(d.getSeconds() + 70);// на 70 секунд больше
 //alert( d ); // выведет корректную дату
 
@@ -1080,19 +1080,19 @@ function isUndefiened(x) { // проверка аргумента на undfined
 
 // Бенчмаркинг !
 // Померяем, какая из функций быстрее:
-/*var arr = [];
+/*let arr = [];
 
-for (var i = 0; i < 1000; i++) arr[i] = 0;
+for (let i = 0; i < 1000; i++) arr[i] = 0;
 
 function walkIn(arr) {
-    for (var key in arr) arr[key]++;
+    for (let key in arr) arr[key]++;
 }
 function walkLength(arr) {
-    for (var i = 0; i < arr.length; i++) arr[i]++;
+    for (let i = 0; i < arr.length; i++) arr[i]++;
 }
 function bench(f) {
-    var date = new Date();
-    for (var i = 0; i < 10000; i++) f(arr);
+    let date = new Date();
+    for (let i = 0; i < 10000; i++) f(arr);
     return new Date() - date;
 }
 alert('Время walkIn: ' + bench(walkIn) + 'мс');
@@ -1100,27 +1100,27 @@ alert('Время walkLength: ' + bench(walkLength) + 'мс'); */
 
 // Гораздо более надёжные результаты можно получить, если весь пакет тестов прогнать много раз.
 
-/* var arr = [];
-for (var i = 0; i < 1000; i++) arr[i] = 0;
+/* let arr = [];
+for (let i = 0; i < 1000; i++) arr[i] = 0;
 
 function walkIn(arr) {
-    for (var key in arr) arr[key]++;
+    for (let key in arr) arr[key]++;
 }
 
 function walkLength(arr) {
-    for (var i = 0; i < arr.length; i++) arr[i]++;
+    for (let i = 0; i < arr.length; i++) arr[i]++;
 }
 
 function bench(f) {
-    var date = new Date();
-    for (var i = 0; i < 1000; i++) f(arr);
+    let date = new Date();
+    for (let i = 0; i < 1000; i++) f(arr);
     return new Date() - date;
 }
 
 // bench для каждого теста запустим много раз, чередуя
-var timeIn = 0,
+let timeIn = 0,
     timeLength = 0;
-for (var i = 0; i < 100; i++) {
+for (let i = 0; i < 100; i++) {
     timeIn += bench(walkIn);
     timeLength += bench(walkLength);
 }
@@ -1142,19 +1142,19 @@ alert('Время walkLength: ' + timeLength + 'мс'); */
 и даже вкладывать измерения друг в друга.В коде ниже таймеры walkIn, walkLength – конкретные тесты,
 а таймер «All Benchmarks» – время «на всё про всё»: */
 
-/* var arr = [];
-for (var i = 0; i < 1000; i++) arr[i] = 0;
+/* let arr = [];
+for (let i = 0; i < 1000; i++) arr[i] = 0;
 
 function walkIn(arr) {
-    for (var key in arr) arr[key]++;
+    for (let key in arr) arr[key]++;
 }
 
 function walkLength(arr) {
-    for (var i = 0; i < arr.length; i++) arr[i]++;
+    for (let i = 0; i < arr.length; i++) arr[i]++;
 }
 
 function bench(f) {
-    for (var i = 0; i < 10000; i++) f(arr);
+    for (let i = 0; i < 10000; i++) f(arr);
 }
 
 console.time("All Benchmarks");
@@ -1181,9 +1181,9 @@ console.timeEnd("All Benchmarks"); */
 
 // ----------------------------------------------------------------------------------
 
-/* var date = new Date(2014, 11, 31, 12, 30, 0);
+/* let date = new Date(2014, 11, 31, 12, 30, 0);
 
-var options = {
+let options = {
   era: 'long',
   year: 'numeric',
   month: 'long',
@@ -1207,7 +1207,7 @@ alert( date.toLocaleString("en-US", options) ); // Wednesday, December 31, 2014 
 // ----------------------------------------------------------------------------------
 
 // Date.parse
-// var msUTC = Date.parse('2012-01-26T13:51:50.417Z'); // зона UTC
+// let msUTC = Date.parse('2012-01-26T13:51:50.417Z'); // зона UTC
 // alert( msUTC ); // 1327571510417 (число миллисекунд)
 
 // Date.now() >> возвращает дату сразу в виде миллисекунд.
@@ -1301,19 +1301,19 @@ function getSecondsToTomorrow() {
 
 function formatDate(date) {
 
-    var dd = date.getDate();
+    let dd = date.getDate();
     if (dd < 10) dd = '0' + dd;
 
-    var mm = date.getMonth() + 1;
+    let mm = date.getMonth() + 1;
     if (mm < 10) mm = '0' + mm;
 
-    var yy = date.getFullYear() % 100;
+    let yy = date.getFullYear() % 100;
     if (yy < 10) yy = '0' + yy;
 
     return dd + '.' + mm + '.' + yy;
 }
 
-var d = new Date(2014, 0, 30); // 30 Янв 2014
+let d = new Date(2014, 0, 30); // 30 Янв 2014
 // formatDate(d); // '30.01.14'
 
 // Task 45 орматирование относительной даты
@@ -1399,7 +1399,7 @@ function formatDate(date) {
 // Task 46 Функция - строковый буфер
 
 function makeBuffer() {
-    var text = '';
+    let text = '';
 
     return function (piece) {
         if (arguments.length == 0) { // вызов без аргументов
@@ -1411,7 +1411,7 @@ function makeBuffer() {
 
 // Task 47 строковой буфер с очисткой
 function makeBuffer() {
-    var text = '';
+    let text = '';
 
     function buffer(piece) {
         if (arguments.length == 0) { // вызов без аргументов
@@ -1430,7 +1430,7 @@ function makeBuffer() {
 // Task 48 сортировка
 
 function makeBuffer() {
-    var text = '';
+    let text = '';
 
     function buffer(piece) {
         if (arguments.length == 0) { // вызов без аргументов
@@ -1455,6 +1455,976 @@ function inArray(arr) {
 let arr = [1, 2, 3, 4, 5, 6, 7];
 alert(arr.filter(inArray([1, 2, 10]))); // 1,2
 
-// Task 49 фильтрация через функцию
+// =====================================================
+
+// Work with spread operators apply(), [...arr1] etc.
+
+// '...'
+
+// - Copying an array >>>  arr1 = [...arr2]
+const fruits = ['🍏', '🍊', '🍌', '🍉', '🍍']
+const moreFruits = [...fruits];
+console.log(moreFruits) // Array(5) [ "🍏", "🍊", "🍌", "🍉", "🍍" ]
+fruits[0] = '🍑'
+console.log(...[...fruits, '...', ...moreFruits]) //  🍑 🍊 🍌 🍉 🍍 ... 🍏 🍊 🍌 🍉 🍍
+
+// - Concatenating or combining arrays
+const myArray = [`🤪`, `🐻`, `🎌`]
+const yourArray = [`🙂`, `🤗`, `🤩`]
+const ourArray = [...myArray, ...yourArray]
+console.log(...ourArray) // 🤪 🐻 🎌 🙂 🤗 🤩
+
+// - Using Math functions
+let arr = [1, 5, 10];
+Math.max(...arr) // 10
+
+// - Using an array as arguments
+const fruitStand = ['🍏', '🍊', '🍌']
+const sellFruit = (f1, f2, f3) => { console.log(`Fruits for sale: ${f1}, ${f2}, ${f3}`) }
+sellFruit(...fruitStand) // Fruits for sale: 🍏, 🍊, 🍌
+fruitStand.pop()
+fruitStand.pop()
+fruitStand.push('🍉')
+fruitStand.push('🍍')
+sellFruit(...fruitStand) // Fruits for sale: 🍏, 🍉, 🍍
+fruitStand.pop()
+fruitStand.pop()
+sellFruit(...fruitStand, '🍋') // Fruits for sale: 🍏, 🍋, undefined
+
+// - Adding an item to a list
+const fewFruit = ['🍏', '🍊', '🍌']
+const fewMoreFruit = ['🍉', '🍍', ...fewFruit]
+console.log(fewMoreFruit) //  Array(5) [ "🍉", "🍍", "🍏", "🍊", "🍌" ]
+
+// - Adding to state in React 
+// https://gist.github.com/djD-REK/9b8d671c8614674104bb076caddc5d2a#file-using-spread-operator-to-add-an-item-to-react-state-js
+
+// - Combining objects 
+const objectOne = { hello: "🤪" }
+const objectTwo = { world: "🐻" }
+const objectThree = { ...objectOne, ...objectTwo, laugh: "😂" }
+console.log(objectThree) // Object { hello: "🤪", world: "🐻", laugh: "😂" }
+const objectFour = { ...objectOne, ...objectTwo, laugh: () => { console.log("😂".repeat(5)) } }
+objectFour.laugh() // 😂😂😂😂😂 // вызов через скомбенированную функцию
+
+//   - Converting NodeList to an array * /
+// [...document.querySelectorAll('div')]
+
+// =====================================================
+// ES6
+
+// Destructuring Assignment to Extract Values from Objects ????
+
+const { today: highToday, tomorrow: highTomorrow } = HIGH_TEMPERATURES; // ES5
+const LOCAL_FORECAST = {
+    yesterday: { low: 61, high: 75 },
+    today: { low: 64, high: 77 },
+    tomorrow: { low: 68, high: 80 }
+};
+const { today: { low: lowToday, high: highToday } } = LOCAL_FORECAST; // ES6
+
+// =====================================================
+// removeFirstTwo
+
+function removeFirstTwo(list) {
+    const [a, b, ...arr] = list;
+    return arr; // [3, 4, 5, 6, 7, 8, 9, 10]
+}
+
+// =====================================================
+
+// time html // для указания времени
+// <p>The match finished at <time datetime="2001-05-15">15 of May</time>.</p>
+
+// =====================================================
+
+// input html (предназначен для создания текстовых полей, различных кнопок, переключателей и флажков.)
+// type: text / password / radio / checkbox / hidden / button / submit / reset / file / image 
+// Atributes: accept (data type file filter for submit) / autocomplete / form (связиает с формой) / max / min / placeholder / required ...
+
+// =====================================================
+
+// fieldset html предназначен для группирования элементов формы
+
+// =====================================================
+
+// Template Literals
+
+for (let i = 0; i < arr.length; i++) {
+    resultDisplayArray.push(`<li class="text-warning">${arr[i]}</li>`);
+}
+// const resultDisplayArray = arr.map(item => `<li class="text-warning">${item}</li>`); (without for loop)
+
+// =====================================================
+
+// ES5 
+const person = {
+    name: "Taylor",
+    sayHello: function () {
+        return `Hello! My name is ${this.name}.`;
+    }
+};
+
+// ES6 
+const person = {
+    name: "Taylor",
+    sayHello() {
+        return `Hello! My name is ${this.name}.`;
+    }
+};
+
+// =====================================================
+// js classes
+
+class Vegetable {
+    constructor(name) {
+        this.name = name
+    }
+}
+const carrot = new Vegetable('carrot');
+console.log(carrot.name); // Should display 'carrot'
+
+// =====================================================
+// Use getters and setters
+// get - связывает свойство объекта с функцией (and creates a function), которая будет вызываться при обращении к этому свойству.
+// set - связывает свойство объекта с функцией, которая будет вызвана при попытке установить это свойство.
+class Thermostat { // create a class
+    constructor(fahrenheit) {
+        this.fahrenheit = fahrenheit;
+    }
+    get temperature() { // use getter
+        return (5 / 9) * (this.fahrenheit - 32);
+    }
+    set temperature(celsius) { // use setter
+        this.fahrenheit = (celsius * 9.0) / 5 + 32;
+    }
+}
+
+const thermos = new Thermostat(76); // Setting in Fahrenheit scale
+let temp = thermos.temperature; // 24.44 in Celsius
+thermos.temperature = 26;
+temp = thermos.temperature; // 26 in Celsius
 
 
+// =====================================================
+
+// Create a Module Script позволяет подключать модули
+// <script type="module" src="index.js"></script>
+
+// =====================================================
+
+// Use export to Share a Code Block
+
+const lowercaseString = (string) => {
+    return string.toLowerCase()
+}
+export { lowercaseString } // експортирут функцию
+
+// =====================================================
+
+// Reuse JavaScript Code Using import
+import { lowercaseString } from './string_functions.js';
+
+// =====================================================
+// Use * to Import Everything from a File
+import * as stringFunctions from './index.js';
+
+// =====================================================
+
+// Create an Export Fallback with export default
+// Если мы хотим экспортировать единственное значение или 
+// иметь резервное значение (fallback) для данного модуля, мы можем использовать export default.
+export default function subtract(x, y) {
+    return x - y;
+}
+
+// =====================================================
+
+//Create a JavaScript Promise используется для отложенных и асинхронных вычислений.
+const makeServerRequest = new Promise((resolve, reject) => { });
+
+// =====================================================
+// Complete a Promise
+const makeServerRequest = new Promise((resolve, reject) => {
+    let responseFromServer;
+    if (responseFromServer) {
+        resolve('We got the data');
+    } else {
+        reject('Data not received')
+    }
+});
+
+// =====================================================
+
+// Handle a Fulfilled Promise with then / catch
+const makeServerRequest = new Promise((resolve, reject) => {
+
+    let responseFromServer = true;
+
+    if (responseFromServer) {
+        resolve("We got the data");
+    } else {
+        reject("Data not received");
+    }
+});
+
+// =====================================================
+
+/* Regular expressions */
+
+let petString = "James has a pet cat.";
+let petRegex = /dog|cat|bird|fish/; // Change this line
+let result = petRegex.test(petString); // true
+let result = extractStr.match(codingRegex); // ["coding", index: 18, input: "Extract the word 'coding' from this string.", groups: undefined]
+
+// i flag = ignore case
+// g flag = To search or extract a pattern more than once.
+//  '.' will match any one character. let unRegex = /.un/; 
+// [aiu] = define a group of characters you wish
+// [a-z] = matched wetween this letters
+// [a-z2-6] = matched wetween this letters and numbers
+// /[^aeiou0-9]/gi = negated character sets (not a wovel and numbers)
+// s+ = возвращает совпадения и если два совпадения подряд возвращает как одно совпадение
+// Aa* = если более одного совпадеия, совпадеия вернется
+// ? = lazy matching ищет как бы ближайшее совпадение 
+let text = "<h1>Winter is coming</h1>";
+let myRegex = /<.?>/; // it's the answer!
+let result = text.match(myRegex);
+// $ = You can search the end of strings
+// \w = This shortcut is equal to [A-Za-z0-9_]
+// \W = This shortcut is equal to [^A-Za-z0-9_]. (ищет все кроме букв и цифр)
+// \d = иещет все цифры
+// \D = все кроме цифр
+// \s = search for whitespace 
+// \S = non whitespace
+// Oh{3,5} = уточняет сколько должно быть овпадений что бы оно вернулось
+let haStr = "Hazzzzah";
+let haRegex = /Haz{4,}ah/; // Change this line
+let result = haRegex.test(haStr);
+// /favou?rite/ = позволяет менять последнюю букву до знака
+// (Frank|Max).*Jameson = может быть несколько вариантов
+
+// lookahead (?=...) where the ... is the required part that is not matched
+// A negative lookahead is used as (?!...) where the ... is the pattern that you do not want to be there.
+// Use lookaheads in the pwRegex to match passwords that are greater than 5 characters long, do not begin with numbers, and have two consecutive digits.
+let sampleWord = "astronaut";
+let pwRegex = /^\D(?=\w{5})(?=\w*\d{2})/;
+let result = pwRegex.test(sampleWord);
+
+// match numbers that are repeated only three times in a string
+let repeatNum = "42 42 42";
+let reRegex = /^(\d+)\s\1\s\1$/; // Change this line
+let result = reRegex.test(repeatNum);
+
+// replace "one two three" with the string "three two one"
+let str = "one two three";
+let fixRegex = /(\w+)\s(\w+)\s(\w+)/; // Change this line
+let replaceText = "$3 $2 $1"; // Change this line
+let result = str.replace(fixRegex, replaceText);
+
+// Remove whitespace
+let hello = "   Hello, World!  ";
+let wsRegex = /^\s+|\s+$/g; // Change this line
+let result = hello.replace(wsRegex, ""); // Change this line
+
+// /^[a-z]([0-9][0-9]+|[a-z]+\d*)$/i
+/* Code Explanation
+^ - start of input
+[a-z] - first character is a letter
+[0-9][0-9]+ - ends with two or more numbers
+| - or
+[a-z]+ - has one or more letters next
+\d* - and ends with zero or more numbers
+$ - end of input
+i - ignore case of input */
+
+// /Oh{3,6}\sno/gi; ???
+
+
+
+// =====================================================
+
+// Task / is it a digit?
+String.prototype.digit = function () { // create a string prototype
+    return /^\d$/g.test(this);
+};
+'1'.digit() // true
+'14'.digit() // false
+
+// =====================================================
+
+// Task / Simple validation of a username with regex
+function validateUsr(username) {
+    /**
+      - `^`        Start from the beginning of the string.
+      - `[]`       Allow any character specified, including...
+      - `a-z`      anything from a to z,
+      - `0-9`      anything from 0 to 9,
+      - `_`        and underscore.
+      - `{4,16}`   Accept 4 to 16 of allowed characters, both numbers included.
+      - `$`        End the string right after specified amount of allowed characters is given.
+    */
+    const validator = /^[a-z0-9_]{4,16}$/;
+
+    return validator.test(username);
+}
+
+// =====================================================
+
+// Task / A Strange Trip to the Market
+function isLockNessMonster(s) {
+    let reg = /3.50|three fifty|tree fiddy/;
+    return reg.test(s);
+}
+
+// =====================================================
+
+// Task / validate code with simple regex
+function validateCode(code) {
+    return /^[1|2|3]/.test(code);
+}
+
+// =====================================================
+
+// Task / Regex count lowercase letters
+function lowercaseCount(str) {
+    return (str.match(/[a-z]/g) || []).length // возвращает длину масива созданного матчем
+}
+
+
+// Palindrome cheker
+function palindrome(str) {
+    return (
+        str.replace(/[\W_]/g, "").toLowerCase() ===
+        str
+            .replace(/[\W_]/g, "")
+            .toLowerCase()
+            .split("")
+            .reverse()
+            .join("")
+    );
+}
+
+function palindrome(str) {
+    str = str.toLowerCase().replace(/[\W_]/g, "");
+    for (let i = 0, len = str.length - 1; i < len / 2; i++) {
+        if (str[i] !== str[len - i]) {
+            return false;
+        }
+    }
+    return true;
+}
+
+// Roman Numeral Converter
+// solution 1
+let convertToRoman = function (num) {
+    let decimalValue = [1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1];
+    let romanNumeral = [
+        "M",
+        "CM",
+        "D",
+        "CD",
+        "C",
+        "XC",
+        "L",
+        "XL",
+        "X",
+        "IX",
+        "V",
+        "IV",
+        "I"
+    ];
+
+    let romanized = "";
+
+    for (let index = 0; index < decimalValue.length; index++) {
+        while (decimalValue[index] <= num) {
+            romanized += romanNumeral[index];
+            num -= decimalValue[index];
+        }
+    }
+
+    return romanized;
+};
+
+// test here
+convertToRoman(36);
+
+// solution 2 
+
+function convertToRoman(num) {
+    let romans = ["I", "V", "X", "L", "C", "D", "M"],
+        ints = [],
+        romanNumber = [],
+        numeral = "",
+        i;
+    while (num) {
+        ints.push(num % 10);
+        num = Math.floor(num / 10);
+    }
+    for (i = 0; i < ints.length; i++) {
+        units(ints[i]);
+    }
+    function units() {
+        numeral = romans[i * 2];
+        switch (ints[i]) {
+            case 1:
+                romanNumber.push(numeral);
+                break;
+            case 2:
+                romanNumber.push(numeral.concat(numeral));
+                break;
+            case 3:
+                romanNumber.push(numeral.concat(numeral).concat(numeral));
+                break;
+            case 4:
+                romanNumber.push(numeral.concat(romans[i * 2 + 1]));
+                break;
+            case 5:
+                romanNumber.push(romans[i * 2 + 1]);
+                break;
+            case 6:
+                romanNumber.push(romans[i * 2 + 1].concat(numeral));
+                break;
+            case 7:
+                romanNumber.push(romans[i * 2 + 1].concat(numeral).concat(numeral));
+                break;
+            case 8:
+                romanNumber.push(
+                    romans[i * 2 + 1]
+                        .concat(numeral)
+                        .concat(numeral)
+                        .concat(numeral)
+                );
+                break;
+            case 9:
+                romanNumber.push(romans[i * 2].concat(romans[i * 2 + 2]));
+        }
+    }
+    return romanNumber
+        .reverse()
+        .join("")
+        .toString();
+}
+
+// test here
+convertToRoman(97);
+
+
+// solution 3 
+
+function convertToRoman(num) {
+    let romans = [
+        // 10^i 10^i*5
+        ["I", "V"], // 10^0
+        ["X", "L"], // 10^1
+        ["C", "D"], // 10^2
+        ["M"] // 10^3
+    ],
+        digits = num
+            .toString()
+            .split("")
+            .reverse()
+            .map(function (item, index) {
+                return parseInt(item);
+            }),
+        numeral = "";
+
+    // Loop through each digit, starting with the ones place
+    for (let i = 0; i < digits.length; i++) {
+        // Make a Roman numeral that ignores 5-multiples and shortening rules
+        numeral = romans[i][0].repeat(digits[i]) + numeral;
+        // Check for a Roman numeral 5-multiple version
+        if (romans[i][1]) {
+            numeral = numeral
+                // Change occurrences of 5 * 10^i to the corresponding 5-multiple Roman numeral
+                .replace(romans[i][0].repeat(5), romans[i][1])
+                // Shorten occurrences of 9 * 10^i
+                .replace(
+                    romans[i][1] + romans[i][0].repeat(4),
+                    romans[i][0] + romans[i + 1][0]
+                )
+                // Shorten occurrences of 4 * 10^i
+                .replace(romans[i][0].repeat(4), romans[i][0] + romans[i][1]);
+        }
+    }
+
+    return numeral;
+}
+
+// test here
+convertToRoman(36);
+
+
+
+// Caesars Cipher
+
+function rot13(str) {
+    // Split str into a character array
+    return (
+        str
+            .split("")
+            // Iterate over each character in the array
+            .map.call(str, function (char) {
+                // Convert char to a character code
+                let x = char.charCodeAt(0);
+                // Checks if character lies between A-Z
+                if (x < 65 || x > 90) {
+                    return String.fromCharCode(x); // Return un-converted character
+                }
+                //N = ASCII 78, if the character code is less than 78, shift forward 13 places
+                else if (x < 78) {
+                    return String.fromCharCode(x + 13);
+                }
+                // Otherwise shift the character 13 places backward
+                return String.fromCharCode(x - 13);
+            })
+            .join("")
+    ); // Rejoin the array into a string
+}
+
+
+// Telephone Number Validator
+
+function telephoneCheck(str) {
+    let regex = /^(1\s?)?(\(\d{3}\)|\d{3})[\s\-]?\d{3}[\s\-]?\d{4}$/;
+    return regex.test(str);
+}
+telephoneCheck("555-555-5555");
+
+/* Code Explanation
+- ^ denotes the beginning of the string.
+- (1\s?)? allows for “1” or "1 " if there is one.
+- \d{n} checks for exactly n number of digits so \d{3} checks for three digits.
+- x|y checks for either x OR y so (\(\d{3}\)|\d{3}) checks for either three digits surrounded by parentheses, or three digits by themselves with no parentheses.
+- [\s\-]? checks for spaces or dashes between the groups of digits.
+- $ denotes the end of the string. In this case the beginning ^ and end of the string $ are used in the regex to prevent it from matching any longer string that might contain a valid phone number (eg. “s 555 555 5555 3”).
+- Lastly we use regex.test(str) to test if the string adheres to the regular expression, it returns true or false. */
+
+// Cash Register
+/* You have to create a program that will return an object containing a status key and a change key. The value of status is the string INSUFFICIENT_FUNDS, CLOSED, or OPEN, and the value of change is a 2D array of the change due. */
+// Create an array of objects which hold the denominations and their values
+let denom = [
+    { name: "ONE HUNDRED", val: 100.0 },
+    { name: "TWENTY", val: 20.0 },
+    { name: "TEN", val: 10.0 },
+    { name: "FIVE", val: 5.0 },
+    { name: "ONE", val: 1.0 },
+    { name: "QUARTER", val: 0.25 },
+    { name: "DIME", val: 0.1 },
+    { name: "NICKEL", val: 0.05 },
+    { name: "PENNY", val: 0.01 }
+];
+
+function checkCashRegister(price, cash, cid) {
+    let output = { status: null, change: [] };
+    let change = cash - price;
+
+    // Transform CID array into drawer object
+    let register = cid.reduce(
+        function (acc, curr) {
+            acc.total += curr[1];
+            acc[curr[0]] = curr[1];
+            return acc;
+        },
+        { total: 0 }
+    );
+
+    // Handle exact change
+    if (register.total === change) {
+        output.status = "CLOSED";
+        output.change = cid;
+        return output;
+    }
+
+    // Handle obvious insufficient funds
+    if (register.total < change) {
+        output.status = "INSUFFICIENT_FUNDS";
+        return output;
+    }
+
+    // Loop through the denomination array
+    let change_arr = denom.reduce(function (acc, curr) {
+        let value = 0;
+        // While there is still money of this type in the drawer
+        // And while the denomination is larger than the change remaining
+        while (register[curr.name] > 0 && change >= curr.val) {
+            change -= curr.val;
+            register[curr.name] -= curr.val;
+            value += curr.val;
+
+            // Round change to the nearest hundreth deals with precision errors
+            change = Math.round(change * 100) / 100;
+        }
+        // Add this denomination to the output only if any was used.
+        if (value > 0) {
+            acc.push([curr.name, value]);
+        }
+        return acc; // Return the current change_arr
+    }, []); // Initial value of empty array for reduce
+
+    // If there are no elements in change_arr or we have leftover change, return
+    // the string "Insufficient Funds"
+    if (change_arr.length < 1 || change > 0) {
+        output.status = "INSUFFICIENT_FUNDS";
+        return output;
+    }
+
+    // Here is your change, ma'am.
+    output.status = "OPEN";
+    output.change = change_arr;
+    return output;
+}
+
+// test here
+checkCashRegister(19.5, 20.0, [
+    ["PENNY", 1.01],
+    ["NICKEL", 2.05],
+    ["DIME", 3.1],
+    ["QUARTER", 4.25],
+    ["ONE", 90.0],
+    ["FIVE", 55.0],
+    ["TEN", 20.0],
+    ["TWENTY", 60.0],
+    ["ONE HUNDRED", 100.0]
+]);
+
+/* Code Explanation
+First, create an array of objects with the value of each denomination of bill or coin, along with an output object with the status and change keys. 
+Next, transform the CID array into a drawer object. Then, handle the conditions of exact change and insufficient funds. Loop through the denom array 
+and update the change and values while there is still money of each type in the drawer and while the denomination is larger than the change remaining. 
+Add this denomination to the accumulator of change_arr if any of this type was used. After the loop, change_arr is a 2D array of the change due, sorted 
+from highest to lowest denomination. If there are no elements in change_arr or you still owe change, return the output object with a status of INSUFFICIENT_FUNDS. 
+Finally you can give the correct change. Return the output object with a status of OPEN and change_arr as the value of change. */
+
+
+// Copy an Array with spread operator
+let copyArr = (arr, num) => {
+    let newArr = [];
+    while (num <= 1) {
+        newArr.push([...arr])
+        num--;
+    }
+    return newArr;
+}
+
+// Add fragment with spread operator
+
+let addFragment = () => {
+    let fragment = [2, 3];
+    let numbersToFive = [1, ...fragment, 4, 5];
+    return numbersToFive; // [1, 2, 3, 4, 5]
+}
+
+// Iterate Through All an Array's Items Using For Loops
+
+function filteredArray(arr, elem) {
+    let newArr = [];
+    for (let i = 0; i < arr.length; i++) {
+        arr[i].indexOf(elem) === -1 ? newArr.push(arr[i]) : true
+    }
+    return newArr;
+}
+console.log(filteredArray([[3, 2, 3], [1, 6, 3], [3, 13, 26], [19, 3, 9]], 3));
+
+
+// Factorialize a Number
+
+// Solution 1 (Recursion) 
+function factorialize(num) {
+    if (num === 0) {
+        return 1;
+    }
+    return num * factorialize(num - 1);
+}
+
+factorialize(5);
+
+// solution 2 
+function factorialize(num) {
+    for (let product = 1; num > 0; num--) {
+        product *= num;
+    }
+    return product;
+}
+
+factorialize(5);
+
+// solution 3 
+function factorialize(num, factorial = 1) {
+    if (num == 0) {
+        return factorial;
+    } else {
+        return factorialize(num - 1, factorial * num);
+    }
+}
+
+factorialize(5);
+
+
+// Solution 4 
+function factorialize(num, factorial = 1) {
+    return num < 0 ? 1 : (
+        new Array(num)
+            .fill(undefined)
+            .reduce((product, val, index) => product * (index + 1), 1)
+    );
+}
+factorialize(5);
+
+
+// Find the Longest Word in a String
+function findLongestWordLength(str) {
+    str = str.split(' ');
+    return str.sort((a, b) => a.length - b.length)[str.length - 1].length;
+}
+function findLongestWordLength2(str) {
+    return Math.max(...str.split(" ").map(word => word.length));
+}
+
+// Return Largest Numbers in Arrays
+function largestOfFour(arr) {
+    return arr.map((group) => group.reduce((prev, current) => current > prev ? current : prev));
+}
+largestOfFour([[4, 5, 1, 3], [13, 27, 18, 26], [32, 35, 37, 39], [1000, 1001, 857, 1]]);
+
+// Confirm the Ending
+
+function confirmEnding(str, target) {
+    return str.slice(str.length - target.length) === target;
+}
+
+// Repeat a String Repeat a String
+function repeatStringNumTimes(str, num) {
+    let accumulatedStr = "";
+
+    while (num > 0) {
+        accumulatedStr += str;
+        num--;
+    }
+
+    return accumulatedStr;
+}
+
+// Repeat a String
+function repeatStringNumTimes(str, num) {
+    return num > 0 ? str + repeatStringNumTimes(str, num - 1) : '';
+}
+
+//Truncate a String
+function truncateString(str, num) {
+    return str.length > num ? str.slice(0, num) + '...' : str;
+}
+
+// Find first element wich pass the func
+let elemPass = (arr, func) => arr.find(func);
+
+// Title Case a Sentence
+function titleCase(str) {
+    let convertToArray = str.toLowerCase().split(" ");
+    let result = convertToArray.map(function (val) {
+        return val.replace(val.charAt(0), val.charAt(0).toUpperCase());
+    });
+    return result.join(" ");
+}
+
+titleCase("I'm a little tea pot");
+
+
+// Chunky Monkey // split arr (first argument) into smaller chunks of arrays with the length provided by size (second argument). https://forum.freecodecamp.org/t/freecodecamp-challenge-guide-chunky-monkey/16005                          
+function chunkArrayInGroups(arr, size) {
+    let newArr = [];
+    while (arr.length) {
+        newArr.push(arr.splice(0, size));
+    }
+    return newArr;
+}
+
+// Mutations // Return true if the string in the first element of the array contains all of the letters of the string in the second element of the array…
+
+function mutation(arr) {
+    let test = arr[1].toLowerCase();
+    let target = arr[0].toLowerCase();
+    for (let i = 0; i < test.length; i++) {
+        if (target.indexOf(test[i]) < 0) return false;
+    }
+    return true;
+}
+
+// Where do I Belong // You need to find where in the array a number should be inserted by order, and return the index where it should go.
+
+function getIndexToIns(arr, num) {
+    arr.sort(function (a, b) {
+        return a - b;
+    });
+
+    for (let a = 0; a < arr.length; a++) {
+        if (arr[a] >= num) return a;
+    }
+
+    return arr.length;
+}
+
+// Falsy Bouncer // Remove all falsy values from an array.
+
+function bouncer(arr) {
+    let newArray = [];
+    for (let i = 0; i < arr.length; i++) {
+        if (arr[i]) newArray.push(arr[i]);
+    }
+    return newArray;
+}
+
+// Slice and Splice // We need to copy each element from the first array into the second array starting at the index n.
+
+function frankenSplice(arr1, arr2, n) {
+    let localArr = arr2.slice();
+    localArr.splice(n, 0, ...arr1);
+    return localArr;
+}
+
+/* 
+    \'	=> single quote
+    \"	=> double quote
+    \\  => backslash
+    \n	=> newline
+    \r	=> carriage return
+    \t	=> tab
+    \b	=> word boundary
+    \f	=> form feed 
+*/
+
+
+let getSum = (a, b) => a + b; // куда оно выводиться вместо консоли?
+let getSum = (a, b) => console.log(a + b); // здесь точно идет в консоль
+
+
+// Counting Cards // 
+
+var count = 0;
+function cc(card) {
+    // Only change code below this line
+    let regex = /[JQKA]/;
+    if (card > 1 && card < 7) {
+        count++;
+    } else if (card === 10 || String(card).match(regex)) {
+        count--;
+    }
+    if (count > 0) return count + " Bet";
+    return count + " Hold";
+}
+
+// Record Collection
+
+// Setup
+var collection = {
+    2548: {
+        album: "Slippery When Wet",
+        artist: "Bon Jovi",
+        tracks: [
+            "Let It Rock",
+            "You Give Love a Bad Name"
+        ]
+    },
+    2468: {
+        album: "1999",
+        artist: "Prince",
+        tracks: [
+            "1999",
+            "Little Red Corvette"
+        ]
+    },
+    1245: {
+        artist: "Robert Palmer",
+        tracks: []
+    },
+    5439: {
+        album: "ABBA Gold"
+    }
+};
+
+// Only change code below this line
+function updateRecords(id, prop, value) {
+    if (value === "") delete collection[id][prop];
+    else if (prop === "tracks") {
+        collection[id][prop] = collection[id][prop] || [];
+        collection[id][prop].push(value);
+    } else {
+        collection[id][prop] = value;
+    }
+    return collection;
+}
+
+updateRecords(5439, "artist", "ABBA");
+
+// Nesting For Loops
+
+function multiplyAll(arr) {
+    var product = 1;
+    // Only change code below this line
+    for (let i = 0; i < arr.length; i++) {
+        for (let j = 0; j < arr[i].length; j++) {
+            product *= arr[i][j];
+        }
+
+    }
+    // Only change code above this line
+    return product;
+}
+
+// Replace Loops using Recursion
+
+function sum(arr, n) {
+
+    if (n <= 0) {
+        return 0;
+    } else
+        return sum(arr, n - 1) + arr[n - 1]
+
+}
+
+// Profile Lookup
+
+function lookUpProfile(name, prop) {
+    for (var i = 0; i < contacts.length; i++) {
+        if (contacts[i].firstName === name) {
+            if (prop in contacts[i]) {
+                return contacts[i][prop];
+            } else return "No such property";
+        }
+    }
+    return "No such contact";
+}
+
+// Generate Random Whole Numbers within a Range
+function randomRange(myMin, myMax) {
+    // Only change code below this line
+    return Math.floor(Math.random() * (myMax - myMin + 1)) + myMin;
+    // Only change code above this line
+}
+
+/// Use Recursion to Create a Countdown
+
+function countdown(n) {
+    if (n < 1) {
+        return [];
+    } else {
+        const countArray = countdown(n - 1);
+        countArray.unshift(n); // also we can use push()
+        return countArray;
+    }
+}
+
+// Use Recursion to Create a Range of Numbers
+function rangeOfNumbers(startNum, endNum) {
+    return startNum === endNum
+        ? [startNum]
+        : rangeOfNumbers(startNum, endNum - 1).concat(endNum);
+}
+
+// 4 штуки Q&A / в день
+// Каждую пятницу практика инервью
+// Отдельные вопросы задавать через свой канал в слэке с обращением к конкретному иэнору
+// Запонять форму для фидбэка
+// улучшать скорость набора
+// 
